@@ -26,3 +26,5 @@ joblib>=1.3.0
 requests>=2.31.0          # appels API Groq (chatbot)
 
 mkdocs-material
+
+myst-parser
