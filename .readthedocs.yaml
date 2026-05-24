@@ -5,11 +5,10 @@ build:
   tools:
     python: "3.10"
 
-# Si vous utilisez MkDocs pour votre documentation
-mkdocs:
-  configuration: mkdocs.yml
+# On bascule officiellement sur Sphinx en lui donnant le chemin de votre conf.py
+sphinx:
+  configuration: docs/conf.py
 
-# C'est ici qu'on gère proprement l'installation de vos dépendances python
 python:
   install:
     - requirements: requirements.txt
