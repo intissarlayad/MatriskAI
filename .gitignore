@@ -60,3 +60,9 @@ shap_importance_bar.png
 # 4. Ignore performance and action summaries
 step2_rapport_performance.txt
 step4_resume_executif.txt
+
+# 5. Ignore generated documentation
+docs/_build/
+
+# 6. Ignore temporary files
+secret-replace.txt
