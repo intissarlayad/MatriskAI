@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE settings
+.idea/
+.vscode/
+
+# MatriskAI custom ignores
+# 1. Ignore Excel and CSV data files (protect confidential data)
+Fichiers Excel/*.xlsx
+Fichiers Excel/*.csv
+Snapshots/*.csv
+historique_sri.csv
+step3_forecast_fournisseurs.csv
+step3_forecast_materiaux.csv
+step4_plan_actions.csv
+
+# 2. Ignore logs
+Logs/*.log
+
+# 3. Ignore ML models and plots
+xgb_model.pkl
+shap_beeswarm_eleve.png
+shap_importance_bar.png
+
+# 4. Ignore performance and action summaries
+step2_rapport_performance.txt
+step4_resume_executif.txt

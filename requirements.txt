@@ -1,0 +1,26 @@
+# MatriskAI v4 — Dépendances Python
+# Installation : pip install -r requirements.txt
+
+# ── Core data ────────────────────────────────────────────────────
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0          # lecture fichiers Excel
+
+# ── Machine Learning ─────────────────────────────────────────────
+xgboost>=2.0.0
+scikit-learn>=1.3.0
+shap>=0.44.0
+
+# ── Time Series Forecast ─────────────────────────────────────────
+prophet>=1.1.5            # optionnel mais recommandé (pip install prophet peut prendre 10 min)
+
+# ── Dashboard ────────────────────────────────────────────────────
+streamlit>=1.30.0
+plotly>=5.18.0
+
+# ── Visualisation ────────────────────────────────────────────────
+matplotlib>=3.7.0
+
+# ── Utilitaires ──────────────────────────────────────────────────
+joblib>=1.3.0
+requests>=2.31.0          # appels API Groq (chatbot)
