@@ -4,6 +4,12 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.10"
-  jobs:
-    pre_build:
-      - pip install -r docs/requirements.txt
+
+# Si vous utilisez MkDocs pour votre documentation
+mkdocs:
+  configuration: mkdocs.yml
+
+# C'est ici qu'on gère proprement l'installation de vos dépendances python
+python:
+  install:
+    - requirements: requirements.txt
