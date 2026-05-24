@@ -1,0 +1,4 @@
+site_name: MatriskAI Documentation
+theme: material # ou "readthedocs" si vous n'avez pas installé le thème material
+nav:
+  - Accueil: README.md
