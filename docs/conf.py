@@ -8,14 +8,13 @@ release = '4.1'
 
 extensions = [
     'myst_parser',
-    'sphinx_rtd_theme',
 ]
 
-templates_path = ['_templates']
+templates_path = []
 exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
+html_static_path = []
 
 # Enable markdown support
 source_suffix = {
