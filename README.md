@@ -180,15 +180,6 @@ L'ordre canonique pour une mise à jour mensuelle de vos données est :
 
 ---
 
-## ✅ Problèmes Connus & Limitations (Corrigés)
-
-Ce projet est transparent sur ses limites actuelles, **toutes corrigées dans la dernière version (v4.2)** :
-*   ~~**`vitesse_degradation` aberrante** : La lecture des anciens snapshots produisait des valeurs aberrantes.~~ *(Corrigé : Valeurs physiquement plafonnées entre -5.0 et +5.0)*
-*   ~~**Calibration isotonique échoue** : La classe `Élevé` est trop rare.~~ *(Corrigé : Bypass automatique et propre de la calibration en faveur du modèle brut si données insuffisantes, garantissant aucune interruption)*
-*   ~~**Double snapshot le même jour** : L'historique doublonne.~~ *(Corrigé : Déduplication stricte par date et matériau intégrée)*
-*   ~~**Erreur d'initialisation Stan (Prophet)** : Survient sur des séries de données parfaitement constantes.~~ *(Corrigé : Bypass automatique de Prophet vers la projection linéaire si variance nulle détectée)*
-
----
 
 ## 🗺 Roadmap
 
