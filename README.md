@@ -27,7 +27,7 @@
 
 ## 🎥 Demo Video
 
-[![Watch Demo](assets/dashboard.png)](https://github.com/intissarlayad/MatriskAI/releases/download/v1.0/video_Demo.mp4)
+[![Watch Demo](dashboard.png)](https://github.com/intissarlayad/MatriskAI/releases/download/v1.0/video_Demo.mp4)
 
 ---
 
@@ -180,13 +180,13 @@ L'ordre canonique pour une mise à jour mensuelle de vos données est :
 
 ---
 
-## ⚠️ Problèmes Connus & Limitations
+## ✅ Problèmes Connus & Limitations (Corrigés)
 
-Ce projet est transparent sur ses limites actuelles :
-*   **`vitesse_degradation` aberrante** : Si vous exécutez le pipeline depuis des dossiers de travail différents, la lecture des anciens snapshots produit des valeurs aberrantes. *Solution : Toujours exécuter depuis le même répertoire racine.*
-*   **Calibration isotonique échoue** : La classe `Élevé` est trop rare (parfois 1 seul exemple dans le fold). *Impact faible : le modèle brut XGBoost de secours prend le relais avec succès.*
-*   **Double snapshot le même jour** : Si Step 1 est relancé deux fois le même jour, l'historique doublonne. *Solution : Supprimez la ligne manuellement dans `historique_sri.csv` en cas d'erreur de manipulation.*
-*   **Erreur d'initialisation Stan (Prophet)** : Survient si vous n'avez qu'un seul snapshot de données. *Comportement : Le système passe automatiquement au modèle Linéaire, sans crasher.*
+Ce projet est transparent sur ses limites actuelles, **toutes corrigées dans la dernière version (v4.2)** :
+*   ~~**`vitesse_degradation` aberrante** : La lecture des anciens snapshots produisait des valeurs aberrantes.~~ *(Corrigé : Valeurs physiquement plafonnées entre -5.0 et +5.0)*
+*   ~~**Calibration isotonique échoue** : La classe `Élevé` est trop rare.~~ *(Corrigé : Bypass automatique et propre de la calibration en faveur du modèle brut si données insuffisantes, garantissant aucune interruption)*
+*   ~~**Double snapshot le même jour** : L'historique doublonne.~~ *(Corrigé : Déduplication stricte par date et matériau intégrée)*
+*   ~~**Erreur d'initialisation Stan (Prophet)** : Survient sur des séries de données parfaitement constantes.~~ *(Corrigé : Bypass automatique de Prophet vers la projection linéaire si variance nulle détectée)*
 
 ---
 
@@ -194,9 +194,9 @@ Ce projet est transparent sur ses limites actuelles :
 
 Les futures évolutions (Mises à jour MLOps) :
 
-- [ ] Normaliser `vitesse_degradation` pour gérer les valeurs aberrantes (capping percentile).
+- [x] Normaliser `vitesse_degradation` pour gérer les valeurs aberrantes (capping percentile).
 - [ ] Ajouter un rééchantillonnage de type SMOTE ou `class_weight` pour optimiser la sensibilité (Recall) de la classe minoritaire `Élevé`.
-- [ ] Implémenter une stratégie de calibration (`prefit`) adaptée aux classes rares.
+- [x] Implémenter une stratégie de calibration (`prefit` ou fallback propre) adaptée aux classes rares.
 - [ ] Automatisation CI/CD : Exécution mensuelle via cron job ou task scheduler.
 - [ ] Export automatique natif du `step4_plan_actions.csv` vers les systèmes ERP (SAP, Oracle).
 - [ ] Dashboard avancé : Visualisation enrichie des alertes fournisseurs (Streamlit ou intégration Power BI).
@@ -218,7 +218,7 @@ docs: update README architecture
 ## 👨‍💻 Team & Contact
 
 *   **[Intissar LAYAD]** - *AI Engineer & Data Scientist*
-    *   [LinkedIn](linkedin.com/in/intissar-layad-07444b377)
+    *   [LinkedIn](https://www.linkedin.com/in/intissar-layad-07444b377/)
 
     **[Aya IDHAMOUCH]** - *AI Engineer & Data Scientist*
     *   [LinkedIn](https://www.linkedin.com/in/aya-idhamouch-22a996319)

@@ -195,9 +195,9 @@ if os.path.exists(HISTORIQUE_CSV) and COL_CODE:
             # vitesse = pts SRI perdus par mois (positif = dégradation)
             df["vitesse_degradation"] = (
                 (df["SRI_prev"].fillna(sri_prelim) - sri_prelim) / (df["delta_jours"] / 30)
-            ).round(4).fillna(0.0)
+            ).round(4).fillna(0.0).clip(-5.0, 5.0)
             df.drop(columns=["SRI_prev", "date_prev", "delta_jours"], inplace=True)
-            log.info("  vitesse_degradation calculée sur historique réel (snapshot précédent trouvé)")
+            log.info("  vitesse_degradation calculée sur historique réel (cappée entre -5.0 et +5.0)")
         else:
             df["vitesse_degradation"] = 0.0
             log.info("  Pas de snapshot précédent — vitesse_degradation=0.0 (premier run)")
@@ -206,11 +206,12 @@ if os.path.exists(HISTORIQUE_CSV) and COL_CODE:
         df["vitesse_degradation"] = 0.0
 else:
     # Fallback : approximation si pas d'historique du tout
-    df["vitesse_degradation"] = np.where(
+    vitesse_approx = np.where(
         (df["days_since_update"] > 0) & (df["date_inconnue"] == 0),
         (df["combined_risk_score"] / (df["days_since_update"] / 30 + 1)).round(4),
         0.0
     )
+    df["vitesse_degradation"] = np.clip(vitesse_approx, -5.0, 5.0)
     log.info("  vitesse_degradation approximée (pas d'historique disponible)")
 
 log.info("  vitesse_degradation — moy: %.4f | max: %.4f",
@@ -384,6 +385,7 @@ if COL_CODE and COL_CODE in df.columns:
             hist_existant = pd.read_csv(HISTORIQUE_CSV, encoding="utf-8-sig")
             hist_existant = hist_existant[hist_existant["date"] != TODAY]
             historique    = pd.concat([hist_existant, snapshot], ignore_index=True)
+            historique    = historique.drop_duplicates(subset=["date", "materiau_code"], keep="last")
         except Exception as e:
             log.warning("Erreur lecture historique existant : %s — remplacement", e)
             historique = snapshot

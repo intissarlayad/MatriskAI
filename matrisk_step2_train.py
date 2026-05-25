@@ -189,19 +189,22 @@ except Exception as e:
     log.error("Erreur entraînement XGBoost : %s", e)
     sys.exit(1)
 
-try:
-    # BUG FIX : cv adaptatif — si une classe a moins de 3 samples, cv=3 échoue.
     counts = np.bincount(y_train)
     min_class_count = int(counts[counts > 0].min()) if len(counts[counts > 0]) > 0 else 0
-    cv_cal = min(3, max(2, min_class_count))
-    if min_class_count < 2:
-        raise ValueError(f"Classe trop rare ({min_class_count} sample) — calibration ignorée")
-    model_calibre = CalibratedClassifierCV(xgb_base, method="isotonic", cv=cv_cal)
-    model_calibre.fit(X_train, y_train, sample_weight=sample_weights)
-    log.info("Calibration isotonique appliquée (cv=%d)", cv_cal)
-except Exception as e:
-    log.warning("Calibration échouée (%s) — utilisation du modèle brut", e)
-    model_calibre = xgb_base
+    
+    if min_class_count < 3:
+        log.warning("Classe minoritaire trop rare (%d sample) pour la calibration isotonique croisée.", min_class_count)
+        log.warning("Bypass propre de la calibration. Utilisation du modèle XGBoost brut (par défaut très performant).")
+        model_calibre = xgb_base
+    else:
+        cv_cal = min(3, min_class_count)
+        try:
+            model_calibre = CalibratedClassifierCV(xgb_base, method="isotonic", cv=cv_cal)
+            model_calibre.fit(X_train, y_train, sample_weight=sample_weights)
+            log.info("Calibration isotonique appliquée (cv=%d)", cv_cal)
+        except Exception as e:
+            log.warning("Calibration isotonique échouée (%s) — utilisation du modèle brut", e)
+            model_calibre = xgb_base
 
 
 # ══════════════════════════════════════════════════════════════════

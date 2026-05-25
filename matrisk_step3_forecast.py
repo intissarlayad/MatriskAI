@@ -124,6 +124,10 @@ def forecast_prophet(historique_fourn, sri_actuel):
     if len(df_p) < 2:
         return None  # pas assez de points après nettoyage
 
+    # FIX : Éviter l'erreur d'initialisation Stan si la série temporelle est parfaitement constante
+    if df_p["y"].nunique() <= 1:
+        return None
+
     m = Prophet(
         yearly_seasonality=False,
         weekly_seasonality=False,
