@@ -52,10 +52,8 @@ step4_plan_actions.csv
 # 2. Ignore logs
 Logs/*.log
 
-# 3. Ignore ML models and plots
+# 3. Ignore ML models
 xgb_model.pkl
-shap_beeswarm_eleve.png
-shap_importance_bar.png
 
 # 4. Ignore performance and action summaries
 step2_rapport_performance.txt
