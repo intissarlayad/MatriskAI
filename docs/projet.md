@@ -38,7 +38,13 @@ Pour comprendre MatriskAI, il faut comprendre le langage de la Supply Chain :
 * **ASL (Approved Supplier List)** : Liste des fournisseurs approuvés. Un fournisseur peut être "Approved", "Waived", "Probation", etc.
 * **SRI (Supply Risk Index)** : Un score synthétique, de 0 à 100, créé pour MatriskAI. Un SRI de 100 signifie un risque quasi-nul (sécurité maximale), tandis qu'un score bas (ex: < 40) indique un risque critique imminent de rupture ou de non-conformité.
 
-Notre dataset fondateur repose sur un extrait représentatif : un rapport *QML report by Plant* contenant **1 978 matériaux** et **50 colonnes** brutes d'informations hétérogènes (textes, dates, statuts).
+Notre dataset fondateur repose sur un extrait représentatif : un rapport *QML report by Plant* contenant **1 978 matériaux** et **50 colonnes** brutes d'informations hétérogènes (textes, dates, statuts). Ce document de conformité délivré par STMicroelectronics illustre la réalité du terrain et le lien direct entre les fournisseurs et les produits, prouvant la nécessité d'une prévision proactive :
+
+```{image} _static/images/document_conformité_problematique.jpeg
+:alt: Document de conformité STMicroelectronics
+:width: 80%
+:align: center
+```
 
 ## 5. La Solution IA
 

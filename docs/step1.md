@@ -16,6 +16,11 @@ Le nettoyage s'effectue selon les étapes séquentielles suivantes :
 3. **Création du Score Combiné** : `combined_risk_score` = `(0.6 * qml_score) + (0.4 * asl_score)`. Le QML a un poids légèrement supérieur.
 4. **Calcul Temporel** : Extraction de la date de mise à jour et calcul des `days_since_update` par rapport à la date du jour. Création du flag `date_inconnue` si la cellule est vide.
 5. **NLP Basique** : Analyse des commentaires via recherche de mots-clés (regex) pour générer le `text_risk_flag`. Les mots comme "expired", "delay", "issue" déclenchent le drapeau.
+   ```{image} _static/images/datasetnlp_excel.jpeg
+   :alt: Extraction NLP depuis Excel
+   :width: 100%
+   :align: center
+   ```
 6. **Évaluation Logistique** : Calcul du risque lié à la durée de vie (`shelf_life_risk`) et détection des sécurités (certificats, backups de sous-usines).
 7. **Synthèse Heuristique** : Calcul du `score_confiance` de la donnée et du `SRI` final selon la formule analytique.
 8. **Labellisation** : Déduction du `risk_label` (Faible, Moyen, Élevé) basé sur les seuils du SRI définis dans la configuration.
@@ -48,5 +53,10 @@ python matrisk_step1_cleaning.py
 
 **Fichiers générés :**
 * `Fichiers Excel/dataset_clean.csv` : Le dataset final de 1978 lignes.
+  ```{image} _static/images/datasetcleanned_excel.jpeg
+  :alt: Dataset Nettoyé
+  :width: 100%
+  :align: center
+  ```
 * `historique_sri.csv` : L'historique cumulé.
 * `Snapshots/snapshot_YYYY-MM-DD.csv` : La sauvegarde de la session.

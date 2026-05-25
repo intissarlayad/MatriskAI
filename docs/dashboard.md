@@ -17,6 +17,14 @@ Le dashboard est entièrement codé en Python à l'aide du framework open-source
 :align: center
 ```
 
+Le dashboard intègre également des visualisations avancées comme la **Heatmap des fournisseurs**, permettant de repérer en un coup d'œil les zones de concentration des risques (matériaux critiques par fournisseur) :
+
+```{image} _static/images/hitmap_fournisseur.jpeg
+:alt: Heatmap Fournisseurs
+:width: 80%
+:align: center
+```
+
 ## 3. Les Onglets Principaux
 
 La navigation s'effectue via une barre latérale.

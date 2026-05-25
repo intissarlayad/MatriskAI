@@ -54,4 +54,9 @@ python matrisk_step4_prescriptif.py
 
 **Fichiers générés :**
 * `step4_plan_actions.csv` : Le grand livre des actions (Code Matériel, Fournisseur, Action à réaliser, Urgence).
+  ```{image} _static/images/dayaset_plan-d-action.jpeg
+  :alt: Plan d'Actions
+  :width: 100%
+  :align: center
+  ```
 * `step4_resume_executif.txt` : Le texte de synthèse.

@@ -36,6 +36,12 @@ Le modèle classe les fournisseurs selon le SRI prédit à 90 jours :
 * 🟡 **ATTENTION (40 <= SRI < 65)** : Zone d'incertitude, dégradation en cours. (Ex: 13 fournisseurs).
 * 🟢 **OK (SRI >= 65)** : Stable et sécurisé. (Ex: 56 fournisseurs).
 
+```{image} _static/images/distribution_sri.jpeg
+:alt: Distribution détaillée du SRI
+:width: 80%
+:align: center
+```
+
 ```{image} _static/images/sri_score.png
 :alt: Distribution des scores SRI
 :width: 80%
@@ -52,7 +58,17 @@ python matrisk_step3_forecast.py
 
 **Fichiers générés :**
 * `step3_forecast_fournisseurs.csv` : Tendances agrégées par SupplierName.
+  ```{image} _static/images/datasetforecastfournisseur_excel.jpeg
+  :alt: Prévisions Fournisseurs
+  :width: 100%
+  :align: center
+  ```
 * `step3_forecast_materiaux.csv` : Tendances unitaires par code matériel.
+  ```{image} _static/images/dayasetforecastmateriaux.jpeg
+  :alt: Prévisions Matériaux
+  :width: 100%
+  :align: center
+  ```
 
 ```{note}
 **Phase de "Warm-up"** : Prophet devient véritablement pertinent à partir de la génération du **4ème snapshot mensuel** dans le dossier `Snapshots/`. Avant cela, c'est le fallback linéaire qui assure la stabilité.
