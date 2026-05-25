@@ -1,271 +1,231 @@
 <div align="center">
+  <img src="logo_nouveau.jpeg" alt="MatriskAI Logo" width="200" />
+  
+  <h1>MatriskAI</h1>
+  <p><strong>AI-Powered Supply Chain Risk Intelligence Platform</strong></p>
 
-<img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-<img src="https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
-<img src="https://img.shields.io/badge/XGBoost-2.0%2B-E8563B?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/Groq-LLaMA_3.3-7C3AED?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/version-4.1-4ade80?style=for-the-badge"/>
-
-# 🧑‍💻 MatriskAI
-### Supply Chain Risk Intelligence
-
-**Détection · Prévision · Prescription des risques fournisseurs**  
-Pipeline ML end-to-end · Dashboard interactif · Chatbot IA intégré
-
+  <!-- Badges -->
+  <p>
+    <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white" />
+    <img src="https://img.shields.io/badge/Version-v4.1-58a6ff?style=flat-square" />
+    <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
+    <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" />
+    <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
+    <img src="https://img.shields.io/badge/Docker-Supported-2496ED?style=flat-square&logo=docker&logoColor=white" />
+  </p>
+  
+  <p>
+    <em>End-to-End AI System for Supply Chain Risk Detection, Forecasting, and Prescription</em>
+  </p>
+  
+  <p>
+    <b>Dataset :</b> 1978 matériaux | 50 colonnes &nbsp;&nbsp;•&nbsp;&nbsp; <b>Dernière exécution :</b> 2026-05-24
+  </p>
 </div>
 
 ---
 
-## ✨ Ce que fait MatriskAI
+## 🎥 Demo Video
 
-MatriskAI transforme votre **QML Report by Plant** (fichier Excel brut) en intelligence opérationnelle :
-
-| Ce que vous avez | Ce que MatriskAI produit |
-|---|---|
-| Fichier Excel fournisseurs/matériaux | Score SRI 0–100 par matériau |
-| Statuts QML / ASL disparates | Classification ML : 🔴 Élevé / 🟡 Moyen / 🟢 Faible |
-| Données ponctuelles | Prévisions J+30 / J+90 (Prophet) |
-| Risques non priorisés | Plan d'actions avec dates limites |
-| Données brutes | Dashboard interactif + chatbot IA |
+[![Watch Demo](assets/dashboard.png)](https://github.com/intissarlayad/MatriskAI/releases/download/v1.0/video_Demo.mp4)
 
 ---
 
-## 🏗️ Architecture du pipeline
+## 📑 Table of Contents
 
-```
-📄 QML Report by Plant.xlsx
-         │
-         ▼
-┌─────────────────────────────────┐
-│  STEP 1 — Nettoyage & Features  │  → dataset_clean.csv
-│  Feature Engineering + SRI      │  → historique_sri.csv (snapshot mensuel)
-└─────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────┐
-│  STEP 2 — XGBoost + SHAP        │  → step2_predictions.csv
-│  Calibration · Anomalies IA     │  → xgb_model.pkl
-└─────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────┐
-│  STEP 3 — Forecast Prophet      │  → step3_forecast_fournisseurs.csv
-│  Time Series J+30 / J+90        │  → step3_forecast_materiaux.csv
-└─────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────┐
-│  STEP 4 — Moteur Prescriptif    │  → step4_plan_actions.csv
-│  15 règles · P1/P2/P3           │  → step4_resume_executif.txt
-└─────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────┐
-│  STEP 5 — Dashboard Streamlit   │  Interface web interactive
-│  + Chatbot Groq LLaMA 3.3       │  + Assistant flottant 🧑‍💻
-└─────────────────────────────────┘
-```
+1. [Vue d'ensemble](#-vue-densemble)
+2. [AI Solution](#-ai-solution)
+3. [Project Architecture](#-project-architecture)
+4. [Dataset & Features](#-dataset--features)
+5. [Pipeline (Les 4 Étapes)](#-pipeline--les-4-étapes)
+6. [Results & Metrics](#-results--metrics)
+7. [Screenshots](#-screenshots)
+8. [Getting Started & Déploiement](#-getting-started--déploiement)
+9. [Exécution & Maintenance](#-exécution--maintenance)
+10. [Problèmes Connus & Limitations](#-problèmes-connus--limitations)
+11. [Roadmap](#-roadmap)
+12. [Team & Contact](#-team--contact)
 
 ---
 
-## 🚀 Démarrage rapide
+## 🛑 Vue d'ensemble
 
-### 1. Cloner le repo
+Les chaînes d'approvisionnement (Supply Chains) souffrent de perturbations majeures causées par des défaillances de fournisseurs et des retards logistiques. Gérer ces risques complexes via des rapports Excel statiques (comme les QML/ASL Reports) est extrêmement propice aux erreurs, chronophage et fondamentalement réactif.
+
+**MatriskAI** est un pipeline de data science en 4 étapes conçu pour évaluer, prédire et prescrire des actions sur les risques liés aux matériaux industriels, en combinant machine learning, séries temporelles et un moteur de règles prescriptives.
+
+---
+
+## 💡 AI Solution
+
+**Ce que fait l'IA :** Le système ingère les historiques de qualité fournisseurs, génère un Supply Risk Index (SRI), classifie les anomalies (Faible / Moyen / Élevé), et prévoit la dégradation des fournisseurs (J+90).
+**Pourquoi c'est innovant :** L'approche intègre l'analyse prédictive (XGBoost), l'explicabilité (SHAP), les séries temporelles bayésiennes (Prophet), et un système expert local, sans nécessiter d'infrastructures cloud lourdes.
+
+---
+
+## 🏗 Project Architecture
+
+L'architecture est structurée autour d'un pipeline MLOps robuste :
+
+![Project Architecture](pipeline.png)
+
+---
+
+## 📊 Dataset & Features
+
+Le dataset en entrée (`QML report by Plant.xlsx`) contient 1978 lignes et 50 colonnes. Le pipeline d'ingénierie (Step 1) extrait et calcule **13 features** exploitables :
+
+| Feature | Description | Exemple |
+|---|---|---|
+| `qml_risk_score` | Statut QML encodé (0=Certified → 4=Disqualified) | 3 |
+| `asl_risk_score` | Statut ASL encodé | 4 |
+| `combined_risk_score` | Score combiné : 60% QML + 40% ASL | 3.4 |
+| `days_since_update` | Jours depuis la dernière mise à jour | 794 |
+| `date_inconnue` | Flag : date de mise à jour manquante | 0 |
+| `vitesse_degradation` | Vitesse de dégradation du SRI (calculée sur historique réel) | variable |
+| `shelf_life_risk` | Niveau de risque shelf life (0=OK >12m ... 3=<3m) | 1 |
+| `has_ecertificate` | Présence d'un e-Certificate | 1 |
+| `has_subplant_backup` | Présence d'un backup sous-usine | 0 |
+| `text_risk_flag` | Score NLP sur les mots-clés de risque | 3 |
+| `score_confiance` | Score de confiance heuristique (0–100) | 75 |
+| `SRI` | Supplier Risk Index global calculé (0–100, 100=sûr) | 47.7 |
+| `risk_label` | Label final déduit (Faible / Moyen / Élevé) | Moyen |
+
+---
+
+## 🧠 Pipeline : Les 4 Étapes
+
+### Étape 1 — Feature Engineering + Historique
+- **Objectif :** Transformer le brut en signaux ML, et sauvegarder un snapshot daté.
+- **Statistiques :** Majorité de matériaux "Obsolete" (81.4%). Label "Élevé" (2.2% des cas).
+
+### Étape 2 — XGBoost + Calibration + Anomalies
+- **Objectif :** Classificateur XGBoost (Faible/Moyen/Élevé) avec détection d'anomalies `IsolationForest` (99 anomalies détectées, soit 5.0% du dataset).
+- **Features clés :** Utilise 10 des 13 features calculées. Le modèle brut XGBoost est robuste avec une excellente précision globale.
+
+### Étape 3 — Time Series + Prophet
+- **Objectif :** Projection temporelle J+30 / J+90 des SRI par fournisseur.
+- **Dynamique :** Analyse de **76 fournisseurs**. Utilise Prophet pour 58 d'entre eux, avec un repli (fallback) linéaire automatique pour les 18 restants (manque de données).
+
+### Étape 4 — Moteur Prescriptif
+- **Objectif :** 15 règles métiers appliquées pour créer un plan d'action.
+- **Résultat :** **653 actions recommandées** couvrant 150 matériaux problématiques. Réparties en *Requalification, Stock, Prévention, Alternative*.
+
+---
+
+## 📈 Results & Metrics
+
+Voici les métriques exactes issues du dernier cycle d'évaluation :
+
+| Metric | Score / Détail |
+| :--- | :--- |
+| **Précision XGBoost Test Set** | **88.8%** |
+| **F1-Score (CV 5-fold)** | **0.996 ± 0.003** |
+| **Alertes Fournisseurs J+90** | 🔴 7 URGENT | 🟡 13 ATTENTION | 🟢 56 OK |
+| **Confiance Finale (XGBoost)** | 85.1 – 86.3 / 100 |
+
+> ℹ️ *Note : Le modèle performe exceptionnellement bien sur la classe "Faible" mais requiert des techniques de rééchantillonnage pour la classe très minoritaire "Élevé" (Seulement 44 matériaux).*
+
+---
+
+## 📸 Screenshots
+
+### 🔹 SRI global
+![Dashboard](sri_score.png)
+
+### 🔹 Explainable AI (SHAP Analysis)
+![SHAP Analysis](shap_beeswarm_eleve.png)
+
+---
+
+## 🚀 Getting Started & Déploiement
+
+### Prérequis & Installation
+- Python 3.9+
+- `prophet` (optionnel mais fortement recommandé pour l'étape 3)
 
 ```bash
-git clone https://github.com/votre-org/matrisk-ai.git
-cd matrisk-ai
-```
+git clone https://github.com/intissarlayad/MatriskAI.git
+cd MatriskAI
 
-### 2. Installer les dépendances
-
-```bash
 pip install -r requirements.txt
-
-# Prophet est optionnel mais recommandé (meilleurs forecasts dès 4 snapshots)
-pip install prophet
+pip install prophet 
 ```
 
-### 3. Lancer le pipeline complet
-
+### Usage
 ```bash
+# Lancer le pipeline complet
 python run_pipeline.py
-```
 
-> Lance automatiquement Step 1 → 2 → 3 → 4. Comptez ~30 secondes.
-
-### 4. Ouvrir le dashboard
-
-```bash
+# Démarrer le Dashboard interactif
 streamlit run Scripts/matrisk_step5_dashboard.py
 ```
 
-Ouvrez `http://localhost:8501` dans votre navigateur. Le chatbot IA est **prêt sans configuration** (clé API intégrée).
-
----
-
-## 📁 Structure du projet
-
-```
-MatriskAI/
-│
-├── 📄 config.py                    ← Configuration centrale (chemins, features, seuils)
-├── 🚀 run_pipeline.py              ← Lanceur pipeline (Steps 1→4)
-│
-├── 🔧 matrisk_step1_cleaning.py    ← Nettoyage + Feature Engineering + SRI
-├── 🤖 matrisk_step2_train.py       ← XGBoost + Calibration + SHAP + Anomalies
-├── 📈 matrisk_step3_forecast.py    ← Time Series (Prophet / projection linéaire)
-├── 📋 matrisk_step4_prescriptif.py ← Moteur prescriptif 15 règles
-│
-├── Scripts/
-│   └── 🖥️ matrisk_step5_dashboard.py ← Dashboard Streamlit + Chatbot Groq
-│
-├── Fichiers Excel/                 ← ⚠️ Données — ignorées par Git
-│   ├── QML report by Plant.xlsx   ← VOTRE FICHIER D'ENTRÉE
-│   ├── dataset_clean.csv          ← Généré par Step 1
-│   └── step2_predictions.csv      ← Généré par Step 2
-│
-├── Snapshots/                      ← Historique mensuel (auto-généré)
-├── Logs/                           ← Logs de chaque step
-│
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
----
-
-## 🧠 Le Score SRI expliqué
-
-Le **Supply Risk Index (SRI)** est calculé sur 0–100 à chaque exécution de Step 1 :
-
-```
-SRI = 100
-    − (QML×0.6 + ASL×0.4) / 4 × 40    ← statut qualité/fournisseur (max −40)
-    − shelf_life_risk / 3 × 25          ← urgence péremption         (max −25)
-    − text_risk_flag.clip(3) / 3 × 20   ← signaux NLP dans les notes (max −20)
-    + has_ecertificate × 10             ← bonus e-certificat         (+10)
-    + has_subplant_backup × 5           ← bonus fournisseur alternatif (+5)
-```
-
-| SRI | Niveau | Action |
-|---|---|---|
-| ≥ 65 | 🟢 **Faible** | Surveillance normale |
-| 40–64 | 🟡 **Moyen** | Audit planifié |
-| < 40 | 🔴 **Élevé** | Action immédiate |
-
----
-
-## 🖥️ Dashboard — Pages disponibles
-
-| Page | Contenu |
-|---|---|
-| **Vue Globale** | KPIs, distribution, heatmap fournisseurs, top 10 risques + accès chatbot |
-| **Données & Pipeline** | Upload Excel, déclenchement pipeline, état des fichiers |
-| **Time Series IA** | SRI global, anomalies, évolution par fournisseur |
-| **Prévisions J+90** | Forecasts Prophet, scatter actuel vs futur |
-| **Plan d'Actions** | Actions filtrables P1/P2/P3, export CSV |
-| **Explainability SHAP** | Importance des features, beeswarm |
-| **Anomalies** | Matériaux détectés par IsolationForest |
-| **Simulateur What-If** | Simulation de scénarios en temps réel |
-| **🧑‍💻 Assistant IA** | Chatbot Groq LLaMA 3.3 avec contexte dashboard complet |
-
-> **Widget flottant 🧑‍💻** disponible sur toutes les pages — accès instantané au chatbot.
-
----
-
-## ⚡ Commandes utiles
-
+### 🐳 Déploiement Docker
 ```bash
-# Pipeline complet
-python run_pipeline.py
-
-# Étapes sélectives
-python run_pipeline.py --steps 134       # Steps 1, 3 et 4 seulement
-python run_pipeline.py --steps 24        # Réentraîner ML + plan d'actions
-
-# Avec un fichier Excel custom
-python matrisk_step1_cleaning.py --fichier /chemin/vers/mon_fichier.xlsx
-
-# Dashboard avec fichier custom (noter le -- obligatoire)
-streamlit run Scripts/matrisk_step5_dashboard.py -- --fichier /chemin/vers/mon.xlsx
-
-# Vérifier les logs
-tail -f Logs/step2_train.log
+docker build -t matrisk-ai .
+docker run -p 8501:8501 matrisk-ai
 ```
 
 ---
 
-## 🔄 Mise à jour mensuelle
+## 🗓 Exécution & Maintenance
 
-```bash
-# 1. Remplacez le fichier Excel dans Fichiers Excel/
-# 2. Relancez le pipeline
-python run_pipeline.py
+**Fréquence d'exécution recommandée : Mensuelle**
 
-# Step 1 crée automatiquement un nouveau snapshot → historique s'enrichit
-# Prophet s'active automatiquement dès 4 snapshots (meilleure précision)
+L'ordre canonique pour une mise à jour mensuelle de vos données est :
+`matrisk_step1_features.py` ➔ `matrisk_step2_train.py` ➔ `matrisk_step3_forecast.py` ➔ `matrisk_step4_prescriptif.py`
+
+*Note Importante : Prophet s'active automatiquement et devient performant à partir du 4ème snapshot mensuel.*
+
+---
+
+## ⚠️ Problèmes Connus & Limitations
+
+Ce projet est transparent sur ses limites actuelles :
+*   **`vitesse_degradation` aberrante** : Si vous exécutez le pipeline depuis des dossiers de travail différents, la lecture des anciens snapshots produit des valeurs aberrantes. *Solution : Toujours exécuter depuis le même répertoire racine.*
+*   **Calibration isotonique échoue** : La classe `Élevé` est trop rare (parfois 1 seul exemple dans le fold). *Impact faible : le modèle brut XGBoost de secours prend le relais avec succès.*
+*   **Double snapshot le même jour** : Si Step 1 est relancé deux fois le même jour, l'historique doublonne. *Solution : Supprimez la ligne manuellement dans `historique_sri.csv` en cas d'erreur de manipulation.*
+*   **Erreur d'initialisation Stan (Prophet)** : Survient si vous n'avez qu'un seul snapshot de données. *Comportement : Le système passe automatiquement au modèle Linéaire, sans crasher.*
+
+---
+
+## 🗺 Roadmap
+
+Les futures évolutions (Mises à jour MLOps) :
+
+- [ ] Normaliser `vitesse_degradation` pour gérer les valeurs aberrantes (capping percentile).
+- [ ] Ajouter un rééchantillonnage de type SMOTE ou `class_weight` pour optimiser la sensibilité (Recall) de la classe minoritaire `Élevé`.
+- [ ] Implémenter une stratégie de calibration (`prefit`) adaptée aux classes rares.
+- [ ] Automatisation CI/CD : Exécution mensuelle via cron job ou task scheduler.
+- [ ] Export automatique natif du `step4_plan_actions.csv` vers les systèmes ERP (SAP, Oracle).
+- [ ] Dashboard avancé : Visualisation enrichie des alertes fournisseurs (Streamlit ou intégration Power BI).
+
+---
+
+
+## 🤝 Contributing
+
+Les contributions sont vivement encouragées pour améliorer ce projet IA ! Consultez le fichier `CONTRIBUTING.md`.
+Veuillez utiliser les standards **Conventional Commits** :
+```text
+feat: add AI prediction module
+fix: resolve dashboard loading issue
+docs: update README architecture
 ```
 
 ---
+## 👨‍💻 Team & Contact
 
-## 🛠️ Configuration avancée
+*   **[Intissar LAYAD]** - *AI Engineer & Data Scientist*
+    *   [LinkedIn](linkedin.com/in/intissar-layad-07444b377)
 
-Tous les paramètres sont dans **`config.py`** :
+    **[Aya IDHAMOUCH]** - *AI Engineer & Data Scientist*
+    *   [LinkedIn](https://www.linkedin.com/in/aya-idhamouch-22a996319)
 
-```python
-# Ajuster les seuils SRI
-SRI_THRESHOLDS = {
-    "Faible": 65,   # SRI ≥ 65 → Faible
-    "Moyen" : 40,   # SRI ≥ 40 → Moyen
-    # SRI < 40      → Élevé
-}
-
-# Ajouter/retirer des features ML
-ML_FEATURES = [
-    "qml_risk_score",
-    "asl_risk_score",
-    "combined_risk_score",
-    # ...
-]
-```
+Pour toute demande académique, d'investissement ou partenariat technique, n'hésitez pas à ouvrir une Issue ou à me contacter directement.
 
 ---
-
-## 🐛 Bugs connus et fixes (v4.1)
-
-| # | Fichier | Bug | Fix |
-|---|---|---|---|
-| 1 | `requirements.txt` | `requests` manquant → chatbot crash | Ajout `requests>=2.31.0` |
-| 2 | `step2_train.py` | `cv=3` échoue si classe < 3 samples | `cv` adaptatif `min(3, max(2, n))` |
-| 3 | `step2_train.py` | `UndefinedMetricWarning` dans les logs | `zero_division=0` dans `classification_report` |
-| 4 | `dashboard.py` | `sys.argv` cassé sous Streamlit | Parse args après séparateur `--` |
-| 5 | `dashboard.py` | Double appel API Groq | Reset `pending_reply=False` au clic |
-| 6 | `dashboard.py` | `st.image()` ternaire → DeltaGenerator affiché | Remplacement par `if/else` classique |
-
----
-
-## 📦 Dépendances
-
-```
-pandas>=2.0.0       numpy>=1.24.0       openpyxl>=3.1.0
-xgboost>=2.0.0      scikit-learn>=1.3.0  shap>=0.44.0
-streamlit>=1.30.0   plotly>=5.18.0      matplotlib>=3.7.0
-joblib>=1.3.0       requests>=2.31.0
-prophet>=1.1.5      (optionnel)
-```
-
----
-
-## 🤝 Contribuer
-
-Consultez [CONTRIBUTING.md](CONTRIBUTING.md) pour le workflow Git, les conventions de commits et les règles de sécurité des données.
-
----
-
 <div align="center">
-
-**MatriskAI v4.1** · Supply Chain Risk Intelligence  
-Pipeline : Nettoyage → XGBoost + Calibration → Prophet → Prescriptif → Dashboard + Chatbot Groq
-
+  <sub>Built with ❤️ for AI Supply Chain Intelligence. Distributed under the MIT License.</sub>
 </div>
