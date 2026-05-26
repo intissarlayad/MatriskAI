@@ -7,7 +7,7 @@
   <!-- Badges -->
   <p>
     <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white" />
-    <img src="https://img.shields.io/badge/Version-v4.1-58a6ff?style=flat-square" />
+    <img src="https://img.shields.io/badge/Version-v4.2-58a6ff?style=flat-square" />
     <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
     <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" />
     <img src="https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
@@ -16,7 +16,7 @@
   
   <div align="center">
     <h2>🌟 L'Application est en ligne !</h2>
-    <a href="https://matriskai.streamlit.app">
+    <a href="https://matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app/">
       <img src="https://img.shields.io/badge/🚀_Accéder_au_SaaS_Cloud-166534?style=for-the-badge&logo=streamlit" alt="Launch App" />
     </a>
   </div>
@@ -32,30 +32,30 @@
 
 ---
 
-## 🎥 Demo Video
+## Demo Video
 
 [![Watch Demo](dashboard.png)](https://github.com/intissarlayad/MatriskAI/releases/download/v1.0/video_Demo.mp4)
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-1. [Vue d'ensemble](#-vue-densemble)
-2. [AI Solution](#-ai-solution)
-3. [Project Architecture](#-project-architecture)
-4. [Dataset & Features](#-dataset--features)
-5. [Pipeline (Les 4 Étapes)](#-pipeline--les-4-étapes)
-6. [Results & Metrics](#-results--metrics)
-7. [Screenshots](#-screenshots)
-8. [Getting Started & Déploiement](#-getting-started--déploiement)
-9. [Exécution & Maintenance](#-exécution--maintenance)
-10. [Problèmes Connus & Limitations](#-problèmes-connus--limitations)
-11. [Roadmap](#-roadmap)
-12. [Team & Contact](#-team--contact)
+1. [Vue d'ensemble](#vue-densemble)
+2. [AI Solution](#ai-solution)
+3. [Project Architecture](#project-architecture)
+4. [Dataset & Features](#dataset--features)
+5. [Pipeline (Les 4 Étapes)](#pipeline--les-4-étapes)
+6. [Results & Metrics](#results--metrics)
+7. [Screenshots](#screenshots)
+8. [Getting Started & Déploiement](#getting-started--déploiement)
+9. [Exécution & Maintenance](#exécution--maintenance)
+10. [Problèmes Connus & Limitations](#problèmes-connus--limitations)
+11. [Roadmap](#roadmap)
+12. [Team & Contact](#team--contact)
 
 ---
 
-## 🛑 Vue d'ensemble
+## Vue d'ensemble
 
 Les chaînes d'approvisionnement (Supply Chains) souffrent de perturbations majeures causées par des défaillances de fournisseurs et des retards logistiques. Gérer ces risques complexes via des rapports Excel statiques (comme les QML/ASL Reports) est extrêmement propice aux erreurs, chronophage et fondamentalement réactif.
 
@@ -63,14 +63,14 @@ Les chaînes d'approvisionnement (Supply Chains) souffrent de perturbations maje
 
 ---
 
-## 💡 AI Solution
+## AI Solution
 
 **Ce que fait l'IA :** Le système ingère les historiques de qualité fournisseurs, génère un Supply Risk Index (SRI), classifie les anomalies (Faible / Moyen / Élevé), et prévoit la dégradation des fournisseurs (J+90).
 **Pourquoi c'est innovant :** L'approche intègre l'analyse prédictive (XGBoost), l'explicabilité (SHAP), les séries temporelles bayésiennes (Prophet), et un système expert local, sans nécessiter d'infrastructures cloud lourdes.
 
 ---
 
-## 🏗 Project Architecture
+## Project Architecture
 
 L'architecture est structurée autour d'un pipeline MLOps robuste :
 
@@ -78,7 +78,7 @@ L'architecture est structurée autour d'un pipeline MLOps robuste :
 
 ---
 
-## 📊 Dataset & Features
+## Dataset & Features
 
 Le dataset en entrée (`QML report by Plant.xlsx`) contient 1978 lignes et 50 colonnes. Le pipeline d'ingénierie (Step 1) extrait et calcule **13 features** exploitables :
 
@@ -100,7 +100,7 @@ Le dataset en entrée (`QML report by Plant.xlsx`) contient 1978 lignes et 50 co
 
 ---
 
-## 🧠 Pipeline : Les 4 Étapes
+## Pipeline : Les 4 Étapes
 
 ### Étape 1 — Feature Engineering + Historique
 - **Objectif :** Transformer le brut en signaux ML, et sauvegarder un snapshot daté.
@@ -120,7 +120,7 @@ Le dataset en entrée (`QML report by Plant.xlsx`) contient 1978 lignes et 50 co
 
 ---
 
-## 📈 Results & Metrics
+## Results & Metrics
 
 Voici les métriques exactes issues du dernier cycle d'évaluation :
 
@@ -135,7 +135,7 @@ Voici les métriques exactes issues du dernier cycle d'évaluation :
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### 🔹 SRI global
 ![Dashboard](sri_score.png)
@@ -145,13 +145,13 @@ Voici les métriques exactes issues du dernier cycle d'évaluation :
 
 ---
 
-## 🚀 Getting Started & Déploiement
+## Getting Started & Déploiement
 
-## 🚀 Déploiement Cloud (SaaS)
+## Déploiement Cloud (SaaS)
 
 MatriskAI est conçu pour fonctionner en **Software as a Service (SaaS)**. N'importe quelle entreprise peut accéder à notre plateforme sécurisée pour auditer ses fournisseurs sans aucune installation technique.
 
-**🔗 Lien de l'application :** [matriskai.streamlit.app](https://matriskai.streamlit.app)
+**🔗 Lien de l'application :** [matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app](https://matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app/)
 
 ### Démarche de travail (Workflow Utilisateur) :
 Pour des raisons de **sécurité et de confidentialité**, aucune donnée industrielle n'est stockée par défaut sur le serveur. Voici comment une entreprise utilise la plateforme :
@@ -162,7 +162,7 @@ Pour des raisons de **sécurité et de confidentialité**, aucune donnée indust
 
 ---
 
-## 🛠️ Installation Locale (Développeurs)
+## Installation Locale (Développeurs)
 - Python 3.9+
 - `prophet` (optionnel mais fortement recommandé pour l'étape 3)
 
@@ -183,7 +183,7 @@ python run_pipeline.py
 streamlit run Scripts/matrisk_step5_dashboard.py
 ```
 
-### 🐳 Déploiement Docker
+### Déploiement Docker
 ```bash
 docker build -t matrisk-ai .
 docker run -p 8501:8501 matrisk-ai
@@ -191,7 +191,7 @@ docker run -p 8501:8501 matrisk-ai
 
 ---
 
-## 🗓 Exécution & Maintenance
+## Exécution & Maintenance
 
 **Fréquence d'exécution recommandée : Mensuelle**
 
@@ -202,8 +202,7 @@ L'ordre canonique pour une mise à jour mensuelle de vos données est :
 
 ---
 
-
-## 🗺 Roadmap
+## Roadmap
 
 Les futures évolutions (Mises à jour MLOps) :
 
@@ -216,8 +215,7 @@ Les futures évolutions (Mises à jour MLOps) :
 
 ---
 
-
-## 🤝 Contributing
+## Contributing
 
 Les contributions sont vivement encouragées pour améliorer ce projet IA ! Consultez le fichier `CONTRIBUTING.md`.
 Veuillez utiliser les standards **Conventional Commits** :
@@ -228,7 +226,7 @@ docs: update README architecture
 ```
 
 ---
-## 👨‍💻 Team & Contact
+## Team & Contact
 
 *   **[Intissar LAYAD]** - *AI Engineer & Data Scientist*
     *   [LinkedIn](https://www.linkedin.com/in/intissar-layad-07444b377/)

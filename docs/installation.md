@@ -3,7 +3,7 @@
 > [!TIP]
 > **Vous préférez utiliser l'application sans l'installer ?**
 > MatriskAI est disponible directement en ligne en mode SaaS sécurisé. Vous pouvez charger vos propres données et analyser vos fournisseurs sans configuration :
-> 👉 **Accéder à l'application Cloud :** [matriskai.streamlit.app](https://matriskai.streamlit.app)
+> 👉 **Accéder à l'application Cloud :** [matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app](https://matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app/)
 > Pour en savoir plus sur ce mode de fonctionnement, consultez la page [Déploiement Cloud & SaaS](deploiement.md).
 
 ---

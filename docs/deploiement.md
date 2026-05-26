@@ -2,15 +2,15 @@
 
 MatriskAI est disponible en production sous forme d'application Cloud **SaaS (Software as a Service)**. Cela permet à n'importe quelle entreprise ou direction Supply Chain d'utiliser le système d'intelligence artificielle immédiatement, de manière sécurisée et sans aucune installation technique.
 
-## 🔗 Accès à la Plateforme
+## Accès à la Plateforme
 
 L'application de production est hébergée sur le cloud Streamlit Sharing :
 
-🌐 **Lien d'accès public :** [matriskai.streamlit.app](https://matriskai.streamlit.app)
+🌐 **Lien d'accès public :** [matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app](https://matriskai-boxl5ewxxjfqhh3iynmdnv.streamlit.app/)
 
 ---
 
-## 🔒 Confidentialité & Sécurité des Données
+## Confidentialité & Sécurité des Données
 
 La sécurité des données industrielles est une priorité absolue. C'est pourquoi l'application de production respecte les principes suivants :
 * **Zéro Stockage Persistant** : Vos fichiers Excel importés et les résultats calculés sont traités uniquement en mémoire vive (RAM) durant votre session. Rien n'est écrit ou conservé sur le serveur Cloud une fois l'onglet fermé.
@@ -19,7 +19,7 @@ La sécurité des données industrielles est une priorité absolue. C'est pourqu
 
 ---
 
-## 🛠️ Démarche de Travail (Workflow SaaS)
+## Démarche de Travail (Workflow SaaS)
 
 Lorsqu'une entreprise accède au site pour la première fois, l'écran affiche **« Données non disponibles »**. C'est le comportement attendu puisque l'environnement est initialement vierge de toute donnée pour garantir la confidentialité.
 
