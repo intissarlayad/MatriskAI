@@ -1,8 +1,16 @@
 # Installation & Configuration
 
+> [!TIP]
+> **Vous préférez utiliser l'application sans l'installer ?**
+> MatriskAI est disponible directement en ligne en mode SaaS sécurisé. Vous pouvez charger vos propres données et analyser vos fournisseurs sans configuration :
+> 👉 **Accéder à l'application Cloud :** [matriskai.streamlit.app](https://matriskai.streamlit.app)
+> Pour en savoir plus sur ce mode de fonctionnement, consultez la page [Déploiement Cloud & SaaS](deploiement.md).
+
+---
+
 ## 1. Prérequis Système
 
-Pour faire tourner MatriskAI sur votre machine locale, vous avez besoin de :
+Pour faire tourner MatriskAI sur votre machine locale (développement/exécution locale), vous avez besoin de :
 
 * **Python 3.9 ou supérieur** (testé sur 3.10 et 3.11).
 * **Git** (pour cloner le dépôt).
@@ -42,7 +50,7 @@ Le projet repose sur deux fichiers de configuration essentiels :
 Pour utiliser le chatbot de l'Étape 5 (Dashboard), vous devez configurer la clé API Groq.
 1. Créez un fichier texte nommé exactement `.env` à la racine du projet.
 2. Ajoutez cette ligne à l'intérieur :
-   ```env
+   ```text
    GROQ_API_KEY=gsk_VotreCleApiIci
    ```
 ```{note}

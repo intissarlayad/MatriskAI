@@ -41,6 +41,7 @@
 :caption: 📚 Documentation Complète
 
 projet
+deploiement
 architecture
 dataset
 step1

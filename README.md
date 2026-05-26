@@ -10,9 +10,16 @@
     <img src="https://img.shields.io/badge/Version-v4.1-58a6ff?style=flat-square" />
     <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
     <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" />
-    <img src="https://img.shields.io/badge/Streamlit-App-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
+    <img src="https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=flat-square&logo=streamlit&logoColor=white" />
     <img src="https://img.shields.io/badge/Docker-Supported-2496ED?style=flat-square&logo=docker&logoColor=white" />
   </p>
+  
+  <div align="center">
+    <h2>🌟 L'Application est en ligne !</h2>
+    <a href="https://matriskai.streamlit.app">
+      <img src="https://img.shields.io/badge/🚀_Accéder_au_SaaS_Cloud-166534?style=for-the-badge&logo=streamlit" alt="Launch App" />
+    </a>
+  </div>
   
   <p>
     <em>End-to-End AI System for Supply Chain Risk Detection, Forecasting, and Prescription</em>
@@ -140,7 +147,22 @@ Voici les métriques exactes issues du dernier cycle d'évaluation :
 
 ## 🚀 Getting Started & Déploiement
 
-### Prérequis & Installation
+## 🚀 Déploiement Cloud (SaaS)
+
+MatriskAI est conçu pour fonctionner en **Software as a Service (SaaS)**. N'importe quelle entreprise peut accéder à notre plateforme sécurisée pour auditer ses fournisseurs sans aucune installation technique.
+
+**🔗 Lien de l'application :** [matriskai.streamlit.app](https://matriskai.streamlit.app)
+
+### Démarche de travail (Workflow Utilisateur) :
+Pour des raisons de **sécurité et de confidentialité**, aucune donnée industrielle n'est stockée par défaut sur le serveur. Voici comment une entreprise utilise la plateforme :
+1. **Connexion** : L'entreprise accède au lien public du Dashboard. L'interface affiche d'abord *« Données non disponibles »* (environnement vierge et sécurisé).
+2. **Upload** : L'utilisateur se rend dans l'onglet **Données & Pipeline** et dépose son fichier brut (*QML report.xlsx*).
+3. **Exécution Automatique** : Le serveur Cloud ingère le fichier, lance le nettoyage, entraîne le modèle XGBoost, calcule les prévisions Prophet, et génère le plan d'actions (en quelques secondes).
+4. **Analyse & IA** : L'utilisateur navigue dans les onglets pour explorer les Heatmaps, consulter les alertes critiques, et dialoguer avec l'**Assistant IA** intégré (Groq) pour interpréter les résultats.
+
+---
+
+## 🛠️ Installation Locale (Développeurs)
 - Python 3.9+
 - `prophet` (optionnel mais fortement recommandé pour l'étape 3)
 
