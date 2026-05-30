@@ -778,21 +778,68 @@ if page == "Données & Pipeline":
 
                 if st.button("↗ Lancer le pipeline", type="primary"):
                     os.makedirs(FICHIERS_DIR, exist_ok=True)
+                    
+                    # Sauvegarder le fichier importé
+                    saved_file_path = os.path.join(FICHIERS_DIR, uploaded_file.name)
+                    try:
+                        with open(saved_file_path, "wb") as f:
+                            f.write(uploaded_file.getbuffer())
+                    except Exception as e:
+                        st.error(f"Erreur lors de la sauvegarde du fichier importé : {e}")
+                        st.stop()
+                        
                     progress_bar = st.progress(0)
                     status_text  = st.empty()
                     steps = []
-                    if run_full:     steps.append(("Nettoyage & feature engineering",    "matrisk_step1_cleaning.py"))
-                    if run_ml:       steps.append(("Entraînement XGBoost + prédictions", "matrisk_step2_ml.py"))
-                    if run_forecast: steps.append(("Forecast Prophet + prescriptif",     "matrisk_step3_forecast.py"))
-                    for i, (desc, _) in enumerate(steps):
-                        status_text.markdown(f'<p style="color:#5B6B61;font-size:0.85rem">⚙ {desc}…</p>', unsafe_allow_html=True)
-                        progress_bar.progress((i + 0.5) / len(steps))
-                        time.sleep(0.5)
-                        progress_bar.progress((i + 1) / len(steps))
-                    status_text.markdown('<p style="color:#16A34A;font-size:0.85rem">✓ Pipeline terminé</p>', unsafe_allow_html=True)
-                    st.balloons()
-                    st.success("Pipeline exécuté. Rechargez le dashboard pour voir les nouvelles données.")
-                    st.cache_data.clear()
+                    if run_full:     
+                        steps.append(("Nettoyage & feature engineering", "matrisk_step1_cleaning.py"))
+                    if run_ml:       
+                        steps.append(("Entraînement XGBoost + prédictions", "matrisk_step2_train.py"))
+                    if run_forecast: 
+                        steps.append(("Forecast Prophet / Linéaire", "matrisk_step3_forecast.py"))
+                        steps.append(("Moteur Prescriptif", "matrisk_step4_prescriptif.py"))
+                    
+                    import subprocess
+                    success = True
+                    for i, (desc, script_name) in enumerate(steps):
+                        status_text.markdown(f'<p style="color:#5B6B61;font-size:0.85rem">⚙ {desc} en cours…</p>', unsafe_allow_html=True)
+                        progress_bar.progress((i + 0.1) / len(steps))
+                        
+                        script_path = os.path.join(BASE_PATH, script_name)
+                        cmd = [sys.executable, script_path]
+                        if script_name == "matrisk_step1_cleaning.py":
+                            cmd.extend(["--fichier", saved_file_path])
+                            
+                        try:
+                            result = subprocess.run(
+                                cmd,
+                                cwd=BASE_PATH,
+                                capture_output=True,
+                                text=True,
+                                encoding="utf-8",
+                                errors="ignore"
+                            )
+                            if result.returncode == 0:
+                                progress_bar.progress((i + 1.0) / len(steps))
+                            else:
+                                success = False
+                                status_text.markdown(f'<p style="color:#DC2626;font-size:0.85rem">❌ Échec de l\'étape : {desc}</p>', unsafe_allow_html=True)
+                                st.error(f"Erreur lors de l'exécution de {script_name} (code retour {result.returncode})")
+                                with st.expander("Détails de l'erreur (Stderr/Stdout)"):
+                                    st.code(result.stderr or result.stdout)
+                                break
+                        except Exception as e:
+                            success = False
+                            status_text.markdown(f'<p style="color:#DC2626;font-size:0.85rem">❌ Erreur de lancement : {desc}</p>', unsafe_allow_html=True)
+                            st.error(f"Exception : {e}")
+                            break
+                            
+                    if success:
+                        status_text.markdown('<p style="color:#16A34A;font-size:0.85rem">✓ Pipeline terminé avec succès</p>', unsafe_allow_html=True)
+                        st.balloons()
+                        st.success("Pipeline exécuté avec succès. Les KPIs ont été mis à jour.")
+                        st.cache_data.clear()
+                        st.rerun()
             except Exception as e:
                 st.error(f"Erreur de lecture : {e}")
         else:
@@ -833,9 +880,9 @@ if page == "Données & Pipeline":
         st.divider()
         section_header("COMMENT RELANCER MANUELLEMENT")
         st.code("""python matrisk_step1_cleaning.py
-python matrisk_step2_ml.py
+python matrisk_step2_train.py
 python matrisk_step3_forecast.py
-python matrisk_step4_actions.py
+python matrisk_step4_prescriptif.py
 
 # Avec un fichier Excel custom :
 python matrisk_step1_cleaning.py --fichier /chemin/vers/mon_fichier.xlsx
