@@ -796,10 +796,14 @@ if page == "Données & Pipeline":
                     if run_ml:       
                         steps.append(("Entraînement XGBoost + prédictions", "matrisk_step2_train.py"))
                     if run_forecast: 
-                        steps.append(("Forecast Prophet / Linéaire", "matrisk_step3_forecast.py"))
+                        steps.append(("Forecast (mode rapide)", "matrisk_step3_forecast.py"))
                         steps.append(("Moteur Prescriptif", "matrisk_step4_prescriptif.py"))
                     
-                    import subprocess
+                    import subprocess, copy
+                    # Passer NO_PROPHET=1 pour éviter la compilation Stan (très lente sur cloud)
+                    env_cloud = copy.copy(os.environ)
+                    env_cloud["NO_PROPHET"] = "1"
+
                     success = True
                     for i, (desc, script_name) in enumerate(steps):
                         status_text.markdown(f'<p style="color:#5B6B61;font-size:0.85rem">⚙ {desc} en cours…</p>', unsafe_allow_html=True)
@@ -817,7 +821,9 @@ if page == "Données & Pipeline":
                                 capture_output=True,
                                 text=True,
                                 encoding="utf-8",
-                                errors="ignore"
+                                errors="ignore",
+                                env=env_cloud,
+                                timeout=180  # 3 minutes max par étape
                             )
                             if result.returncode == 0:
                                 progress_bar.progress((i + 1.0) / len(steps))
@@ -828,6 +834,11 @@ if page == "Données & Pipeline":
                                 with st.expander("Détails de l'erreur (Stderr/Stdout)"):
                                     st.code(result.stderr or result.stdout)
                                 break
+                        except subprocess.TimeoutExpired:
+                            success = False
+                            status_text.markdown(f'<p style="color:#DC2626;font-size:0.85rem">⏱ Timeout : {desc} a dépassé 3 minutes</p>', unsafe_allow_html=True)
+                            st.error(f"L'étape '{desc}' a dépassé le délai maximum (3 min). Relancez le pipeline.")
+                            break
                         except Exception as e:
                             success = False
                             status_text.markdown(f'<p style="color:#DC2626;font-size:0.85rem">❌ Erreur de lancement : {desc}</p>', unsafe_allow_html=True)

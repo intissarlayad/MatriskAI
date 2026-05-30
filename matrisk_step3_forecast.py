@@ -37,13 +37,17 @@ log.info("Dossier projet : %s", PATHS["base"])
 # 0. VÉRIFICATION PROPHET
 # ══════════════════════════════════════════════════════════════════
 PROPHET_DISPONIBLE = False
-try:
-    from prophet import Prophet
-    PROPHET_DISPONIBLE = True
-    log.info("Prophet détecté — Forecasting avancé activé")
-except ImportError:
-    log.warning("Prophet non installé → Projection linéaire utilisée")
-    log.warning("Pour activer Prophet : pip install prophet")
+# Vérifier si Prophet est désactivé explicitement (ex: sur Streamlit Cloud pour éviter la compilation Stan)
+if os.environ.get("NO_PROPHET", "0") == "1":
+    log.info("Prophet désactivé (NO_PROPHET=1) → Projection linéaire utilisée")
+else:
+    try:
+        from prophet import Prophet
+        PROPHET_DISPONIBLE = True
+        log.info("Prophet détecté — Forecasting avancé activé")
+    except ImportError:
+        log.warning("Prophet non installé → Projection linéaire utilisée")
+        log.warning("Pour activer Prophet : pip install prophet")
 
 
 # ══════════════════════════════════════════════════════════════════
